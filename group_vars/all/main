@@ -1,0 +1,120 @@
+---
+homebrew_installed_packages:
+  # - ansible # Installed via Pip.
+  - tmux
+  - yarn
+  - tree-sitter
+  - autoconf
+  - doxygen
+  # - gettext
+  # - gifsicle
+  # - git
+  # - github/gh/gh
+  # - go
+  # - gpg
+  # - httpie
+  - iperf
+  # - libevent
+  # - sqlite
+  # - mcrypt
+  # - nmap
+  # - node
+  # - nvm
+  # - php
+  # - ssh-copy-id
+  # - cowsay
+  # - readline
+  # - openssl
+  # - pv
+  # - wget
+  # - wrk
+  # - zsh-history-substring-search
+  # - gsl
+  # - llvm
+  # - ccls
+  # - boost
+  # - libomp
+  # - armadillo
+  # - mas
+  # - neovim
+  # - tree
+  # - jq
+  # - gh
+  # - ripgrep
+  # - rename
+  # - bear
+  # - neofetch
+  # - wireguard-go
+  # - gnuplot
+  # - lulu
+  # - ifstat
+  # - hdf5
+  # - mactex
+  # - starship
+  # - dooit
+  # - alfred
+  # - zsh-autosuggestions
+  # - zsh-syntax-highlighting
+  # - skhd
+  # - yabai
+  #   - fyabai --head
+  #   - fnnn --head
+  # - sketchybar
+  # - svim
+  # - sf-symbols
+
+homebrew_taps:
+  - cmacrae/formulae
+  - dteoh/sqa
+  - knqyf263/pet
+  - koekeishiya/formulae
+  - FelixKratz/formulae
+  - nextdns/tap
+  - ruimarinho/tap
+
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps:
+  - telegram
+  - readdle-spark
+  - microsoft-remote-desktop
+  - bitwarden
+  - caffeine
+  # - istat-menus
+  # - visual-studio-code
+  # - copyclip
+  # - parallels
+  # - sf-symbols
+  # - slack
+  # - topnoch
+  # - the-unarchiver
+  # - discord
+  # - plex
+  # - iterm2
+  # - postman
+  # - chromedriver
+  # - docker
+  # - dropbox
+  # - firefox
+  # - google-chrome
+  # - handbrake
+  # - licecap
+  # - sequel-ace
+  # - slack
+  # - sublime-text
+  # - transmit
+  # - vlc
+  # - inkscape
+  # - moonlight
+  # - mumble
+  # - libreoffice
+  # - alacritty
+  # - spotify
+  # - monitorcontrol
+  # - sloth
+  # - zoom
+  # - skim
+  # - meetingbar
+  # - machoview
+  # - hex-fiend
+  # - cutter
+  # - font-hack-nerd-font

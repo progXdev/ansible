@@ -1,0 +1,97 @@
+---
+downloads: ~/.ansible-downloads/
+configure_ssh: true
+configure_git: true
+configure_dotfiles: true
+configure_terminal: false
+configure_osx: true
+configure_extra_packages: false
+configure_post: false
+
+source_key: './.ssh/id_ed25519'
+dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
+
+# Set to 'true' to configure the Dock via dockutil.
+configure_dock: true
+# Dock items to remove.
+dockitems_remove:
+  - Launchpad
+  - TV
+  - Podcasts
+  - 'App Store'
+
+# Dock items to add. `pos` parameter is optional and will place the Dock item
+# in a particular position in the Dock.
+dockitems_persist: []
+# - name: "Sublime Text"
+#   path: "/Applications/Sublime Text.app/"
+#   pos: 5
+
+# Which homebrew cask to install for dockutil
+dockutil_homebrew_cask: hpedrorodrigues/tools/dockutil
+
+# Whether to install dockutil or not
+dockutil_install: true
+
+configure_sudoers: false
+sudoers_custom_config: ''
+# Example:
+# sudoers_custom_config: |
+#   # Allow users in admin group to use sudo with no password.
+#   %admin ALL=(ALL) NOPASSWD: ALL
+# echo "Add sudoer manually:\n '$(whoami) ALL = (root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | awk "{print \$1;}") $(which yabai) --load-sa' to '/private/etc/sudoers.d/yabai'"
+
+dotfiles_repo: 'git@github.com:progXdev/.dotfiles.git'
+dotfiles_repo_local_destination: "{{ lookup('env', 'HOME') }}/.dotfiles"
+dotfiles_repo_version: main
+dotfiles_repo_accept_hostkey: true
+dotfiles_home: '~'
+dotfiles_files:
+  - .zshrc
+  - .gitignore
+  - .inputrc
+  - .osx
+  - .vimrc
+
+osx_script: '~/.osx --no-restart'
+
+# Install packages from other package managers.
+# Note: You are responsible for making sure the required package managers are
+# installed, eg. through homebrew.
+composer_packages: []
+# - name: drush
+#   state: present # present/absent, default: present
+#   version: "^8.1" # default: N/A
+gem_packages: []
+# - name: bundler
+#   state: present # present/absent/latest, default: present
+#   version: "~> 1.15.1" # default: N/A
+npm_packages: []
+# - name: webpack
+#   state: present # present/absent/latest, default: present
+#   version: "^2.6" # default: N/A
+pip_packages: []
+# - name: mkdocs
+#   state: present # present/absent/latest, default: present
+#   version: "0.16.3" # default: N/A
+
+# Set to 'true' to configure Sublime Text.
+configure_sublime: false
+sublime_base_path: '~/Library/Application Support/Sublime Text'
+sublime_config_path: 'Packages/User'
+sublime_package_control:
+  - 'DocBlockr'
+  - 'Dockerfile Syntax Highlighting'
+  - 'FileDiffs'
+  - 'GitHub Flavored Markdown Preview'
+  - 'Jinja2'
+  - 'Package Control'
+  - 'PHP-Twig'
+  - 'Pretty JSON'
+  - 'SublimeLinter'
+  - 'SublimeLinter-contrib-yamllint'
+  - 'TrailingSpaces'
+  - 'WordCount'
+
+# Glob pattern to ansible task files to run after all other tasks are finished.
+post_provision_tasks: []

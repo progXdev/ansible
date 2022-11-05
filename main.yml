@@ -1,0 +1,130 @@
+---
+- hosts: all
+
+  vars_files:
+    - default.config.yml
+
+  pre_tasks:
+    - name: Include playbook configuration.
+      include_vars: '{{ item }}'
+      with_fileglob:
+        - '{{ playbook_dir }}/config.yml'
+      tags: ['always']
+    - import_tasks: tasks/ssh.yml
+      when: configure_ssh
+      tags: ['ssh']
+    # - import_tasks: tasks/git-setup.yml
+    #   when: configure_git
+    #   tags: ['git']
+
+  roles:
+    - role: elliotweiser.osx-command-line-tools
+
+    - role: mac_git
+      tags: [git]
+
+    - role: mac_homebrew_init
+      vars:
+        file: initial
+      tags: [brew, init]
+
+    - role: mac_dotfiles
+      when: configure_dotfiles
+      tags: ['dotfiles', 'stow']
+
+    - role: mac_mas
+      when: mas_installed_apps or mas_installed_app_ids
+      vars:
+        file: mas
+      tags: ['mas']
+
+    - role: mac_dock
+      when: configure_dock
+      tags: ['dock']
+
+    - role: mac_homebrew_main
+      vars:
+        file: main
+      tags: [brew, main]
+
+  tasks:
+    - import_tasks: tasks/sudoers.yml
+      when: configure_sudoers
+      tags: ['sudoers']
+
+    - import_tasks: tasks/terminal.yml
+      when: configure_terminal
+      tags: ['terminal']
+
+    - import_tasks: tasks/osx.yml
+      when: configure_osx
+      tags: ['osx']
+
+    - import_tasks: tasks/extra-packages.yml
+      when: configure_extra_packages
+      tags: ['extra-packages']
+
+    - block:
+        - name: Run configured post-provision ansible task files.
+          include_tasks: '{{ outer_item }}'
+          loop_control:
+            loop_var: outer_item
+          with_fileglob: '{{ post_provision_tasks|default(omit) }}'
+      tags: ['post']
+
+    - import_tasks: tasks/post.yml
+      when: configure_post
+      tags: ['post']
+#      # Installing Fonts
+#      git clone git@github.com:shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono_Nerd_Font
+#      mv /tmp/SFMono_Nerd_Font/* $HOME/Library/Fonts
+#      rm -rf /tmp/SFMono_Nerd_Font/
+#
+#      curl https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.3/sketchybar-app-font.ttf > $HOME/Library/Fonts/sketchybar-app-font.ttf
+#
+#      # nemtom mit csinál pontosan
+#      source $HOME/.zshrc
+#      cfg config --local status.showUntrackedFiles no
+#
+#      # Do not forget to disable SIP...
+#      csrutil status
+#
+#      How do I disable System Integrity Protection?
+#
+# Turn off your device
+#
+# Intel (apple docs):
+#     Hold down command ⌘R while booting your device.
+#
+# Apple Silicon (apple docs):
+#     Press and hold the power button on your Mac until “Loading startup options” appears.
+#     Click Options, then click Continue.
+#
+# In the menu bar, choose Utilities, then Terminal
+#
+# #
+# # APPLE SILICON
+# #
+#
+# # If you're on Apple Silicon macOS 12.x.x
+# # Requires Filesystem Protections, Debugging Restrictions and NVRAM Protection to be disabled
+# # (printed warning can be safely ignored)
+# csrutil disable --with kext --with dtrace --with basesystem
+#
+# #
+# # INTEL
+# #
+#
+# # If you're on Intel macOS 12.x.x or Intel macOS 11.x.x
+# # Requires Filesystem Protections and Debugging Restrictions to be disabled (workaround because --without debug does not work)
+# # (printed warning can be safely ignored)
+# csrutil disable --with kext --with dtrace --with nvram --with basesystem
+# Reboot
+# For Apple Silicon; enable non-Apple-signed arm64e binaries
+# # Open a terminal and run the below command, then reboot
+# sudo nvram boot-args=-arm64e_preview_abi
+# You can verify that System Integrity Protection is turned off by running csrutil status, which returns System Integrity Protection status: disabled. if it is turned off (it may show unknown for newer versions of macOS when disabling SIP partially).
+# If you ever want to re–enable System Integrity Protection after uninstalling yabai; repeat the steps above, but run csrutil enable instead at step 4.
+#
+# Please note that System Integrity Protection will be re–enabled during device repairs or #analysis at any Apple Retail Store or Apple Authorized Service Provider.
+#Yo#u will have to #repeat this step after getting your device back.

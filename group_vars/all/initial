@@ -1,0 +1,17 @@
+---
+homebrew_installed_packages:
+  # - ansible # Installed via Pip.
+  - stow
+  - zsh
+  - git
+
+homebrew_taps:
+  - homebrew/core
+  - homebrew/cask
+  - homebrew/bundle
+  - homebrew/cask-fonts
+  - homebrew/services
+
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps:
+  - numi

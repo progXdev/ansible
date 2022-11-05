@@ -1,0 +1,17 @@
+---
+mas_installed_apps:
+  #  - { id: 425264550, name: 'Blackmagic Disk Speed Test (3.0)' }
+  - { id: 1091189122, name: 'Bear' }
+  # brew - { id: 1352778147, name: 'Bitwarden' }
+  # brew - { id: 1295203466, name: 'Microsoft Remote Desktop' }
+  - { id: 1429386865, name: 'Nightlight' }
+# brew caffeine - { id: 937984704, name: 'Amphetamine' }
+# brew - { id: 1319778037, name: 'iStat Menus' }
+#- { id: 409203825, name: 'Numbers' }
+mas_uninstalled_apps: []
+#  - { id: 497799835, name: 'Xcode (8.1)' }
+mas_installed_app_ids: [] # Deprecated
+mas_upgrade_all_apps: true
+mas_signin_dialog: false
+mas_email: '{{ vault_mas_email }}'
+mas_password: '{{ vault_mass_password }}'
