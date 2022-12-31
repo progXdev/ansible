@@ -1,10 +1,10 @@
 ---
-homebrew_installed_packages:
+main_homebrew_installed_packages:
   # - ansible # Installed via Pip.
   - tmux
   - yarn
   - tree-sitter
-  - autoconf
+  # - autoconf
   - doxygen
   # - gettext
   # - gifsicle
@@ -63,7 +63,7 @@ homebrew_installed_packages:
   # - svim
   # - sf-symbols
 
-homebrew_taps:
+main_homebrew_taps:
   - cmacrae/formulae
   - dteoh/sqa
   - knqyf263/pet
@@ -72,8 +72,8 @@ homebrew_taps:
   - nextdns/tap
   - ruimarinho/tap
 
-homebrew_cask_appdir: /Applications
-homebrew_cask_apps:
+main_homebrew_cask_appdir: /Applications
+main_homebrew_cask_apps:
   - telegram
   - readdle-spark
   - microsoft-remote-desktop

@@ -1,2 +1,30 @@
 ---
-# defaults file for mac_homebrew_main
+main_homebrew_repo: https://github.com/Homebrew/brew
+
+main_homebrew_prefix: "{{ (ansible_machine == 'arm64') | ternary('/opt/homebrew', '/usr/local') }}"
+main_homebrew_install_path: '{{ homebrew_prefix }}/Homebrew'
+main_homebrew_brew_bin_path: '{{ homebrew_prefix }}/bin'
+
+main_homebrew_installed_packages: []
+
+main_homebrew_uninstalled_packages: []
+
+main_homebrew_upgrade_all_packages: false
+
+main_homebrew_taps: []
+
+main_homebrew_cask_apps: []
+main_homebrew_cask_uninstalled_apps: []
+
+main_homebrew_cask_appdir: /Applications
+main_homebrew_cask_accept_external_apps: false
+
+# Set this to your account password if casks need elevated privileges.
+# ansible_become_password: ''
+
+main_homebrew_use_brewfile: true
+main_homebrew_brewfile_dir: '~'
+
+main_homebrew_clear_cache: false
+
+main_homebrew_folders_additional: []

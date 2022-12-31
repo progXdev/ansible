@@ -4,6 +4,7 @@ homebrew_installed_packages:
   - stow
   - zsh
   - git
+  - autoconf
 
 homebrew_taps:
   - homebrew/core

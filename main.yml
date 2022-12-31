@@ -10,44 +10,56 @@
       with_fileglob:
         - '{{ playbook_dir }}/config.yml'
       tags: ['always']
+
     - import_tasks: tasks/ssh.yml
       when: configure_ssh
       tags: ['ssh']
-    # - import_tasks: tasks/git-setup.yml
-    #   when: configure_git
-    #   tags: ['git']
 
-  roles:
-    - role: elliotweiser.osx-command-line-tools
-
-    - role: mac_git
+    - name: git setup
+      include_role:
+        name: mac_git
+      when: configure_git
       tags: [git]
 
-    - role: mac_homebrew_init
+    - name: cmd-line tools install
+      include_role:
+        name: elliotweiser.osx-command-line-tools
+
+  tasks:
+    - name: Clone and stow dotfiles
+      include_role:
+        name: mac_dotfiles
+      when: configure_dotfiles
+      tags: ['dotfiles', 'stow']
+
+    - name: Install initial homebrew stuff
+      include_role:
+        name: mac_homebrew_init
       vars:
         file: initial
       tags: [brew, init]
 
-    - role: mac_dotfiles
-      when: configure_dotfiles
-      tags: ['dotfiles', 'stow']
-
-    - role: mac_mas
+    - name: Install APP store apps
+      include_role:
+        name: mac_mas
       when: mas_installed_apps or mas_installed_app_ids
       vars:
         file: mas
       tags: ['mas']
 
-    - role: mac_dock
+    - name: Configure dock elements
+      include_role:
+        name: mac_dock
       when: configure_dock
       tags: ['dock']
 
-    - role: mac_homebrew_main
+    - name: Install main homebrew stuff
+      include_role:
+        name: mac_homebrew_main
       vars:
         file: main
       tags: [brew, main]
 
-  tasks:
     - import_tasks: tasks/sudoers.yml
       when: configure_sudoers
       tags: ['sudoers']

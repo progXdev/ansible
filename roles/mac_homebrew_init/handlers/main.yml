@@ -1,2 +1,10 @@
 ---
-# handlers file for mac_homebrew_init
+# handlers for ansible-role-homebrew
+
+- name: Clear homebrew cache
+  file:
+    path: '{{ homebrew_cache_path.stdout | trim }}'
+    state: absent
+  when: 'homebrew_clear_cache | bool'
+  become: '{{ (homebrew_user != ansible_user_id) | bool }}'
+  become_user: '{{ homebrew_user }}'
